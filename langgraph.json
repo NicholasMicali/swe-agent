@@ -1,5 +1,6 @@
 {
     "dependencies": ["./agent", "."],
+    "python_version": "3.12",
     "graphs": {
       "agent": "./agent/graph.py:swe_agent",
       "architect": "./langgraph_debug.py:swe_architect",
