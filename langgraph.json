@@ -1,5 +1,5 @@
 {
-    "dependencies": ["./agent"],
+    "dependencies": ["./agent", "."],
     "graphs": {
       "agent": "./agent/graph.py:swe_agent",
       "architect": "./langgraph_debug.py:swe_architect",
