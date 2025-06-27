@@ -61,10 +61,20 @@ class CheckResearchStepOutput(TypedDict):
     is_valid_research_step: bool
     implementation_research_scratchpad: List[AnyMessage]
 
+def sanitize_for_non_tools(msgs: List[AnyMessage]) -> List[AnyMessage]:
+    clean = []
+    for m in msgs:
+        if getattr(m, "tool_calls", None):
+            clean.append(AIMessage(content=m.content))
+        else:
+            clean.append(m)
+    return clean
+
 def check_research_step(state: SoftwareArchitectState)-> CheckResearchStepOutput:
     """Check if the proposed research step has already been explored"""
+    scratch = sanitize_for_non_tools(state.implementation_research_scratchpad)
     response = check_research_runnable.invoke({
-        "implementation_research_scratchpad": state.implementation_research_scratchpad
+        "implementation_research_scratchpad": scratch
     })
     if not response.is_valid:
         return {
