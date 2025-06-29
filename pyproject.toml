@@ -16,3 +16,5 @@ dependencies = [
     "thefuzz>=0.22.1",
     "fuzzysearch>=0.7.3",
 ]
+[tool.setuptools.packages.find]
+where = ["agent"]
